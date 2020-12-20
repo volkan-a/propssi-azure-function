@@ -1,6 +1,7 @@
 from CoolProp.CoolProp import PropsSI
 import azure.functions as func
 import json
+from math import isnan
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -35,7 +36,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             "MolarConstantVolumeSpecificHeat": PropsSI("CVMOLAR", p1, v1, p2, v2, f),
             "PrandtlNumber": PropsSI("PRANDTL", p1, v1, p2, v2, f),
             "Viscosity": PropsSI("VISCOSITY", p1, v1, p2, v2, f),
+            "isCalculated": True
         }
+
+        for key in res.keys:
+            if key != "isCalculated" and not isnan(res[key]):
+                res["isCalculated"] = False
+
         return func.HttpResponse(json.dumps(res))
     else:
         return func.HttpResponse(
