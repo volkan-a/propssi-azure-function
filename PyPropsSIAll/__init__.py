@@ -37,6 +37,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             res = {
                 "id": uuid4().hex,
                 "Name": name,
+                "Fluid": f,
                 "MolarMass": PropsSI("MOLARMASS", p1, v1, p2, v2, f),
                 "Temperature": PropsSI("T", p1, v1, p2, v2, f),
                 "Pressure": PropsSI("P", p1, v1, p2, v2, f),
@@ -59,10 +60,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 "isCalculated": True,
             }
         except:
-            return func.HttpResponse('{"ErrorMessage": "CoolProp error!"}', status_code=400)
+            return func.HttpResponse("CoolProp error!", status_code=400)
 
         for key in res.keys():
-            if key != "isCalculated" and key != "Name" and key != "id" and isnan(res[key]):
+            if key != "isCalculated" and key != "Name" and key != "id" and key != "Fluid" and isnan(res[key]):
                 res["isCalculated"] = False
 
         return func.HttpResponse(json.dumps(res))
