@@ -30,11 +30,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         p2 = property_names[req_body.get('Prop2')]
         v2 = req_body.get('Value2')
         f = req_body.get('Fluid')
+        name = req_body.get('Name')
 
-    if p1 and v1 and p2 and v2 and f:
+    if p1 and v1 and p2 and v2 and f and name:
         try:
             res = {
                 "id": uuid4().int,
+                "Name": name,
                 "MolarMass": PropsSI("MOLARMASS", p1, v1, p2, v2, f),
                 "Temperature": PropsSI("T", p1, v1, p2, v2, f),
                 "Pressure": PropsSI("P", p1, v1, p2, v2, f),
