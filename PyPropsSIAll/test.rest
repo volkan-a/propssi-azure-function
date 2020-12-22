@@ -2,9 +2,10 @@ POST http://localhost:7071/api/PyPropsSIAll HTTP/1.1
 content-type: application/json
 
 {
-    "p1": 1,
-    "v1": 101325.0,
-    "p2": 4,
-    "v2": 1542451,
-    "f" : "Water"
+    "Fluid": "R134a",
+    "Name": "Volkan",
+    "Prop1": 6,
+    "Prop2": 1,
+    "Value1": 0.45399999999999996,
+    "Value2": 285.54999999999995
 }

@@ -7,8 +7,8 @@ from enum import Enum
 
 
 class Property(Enum):
-    TEMPERATUE = 0
-    PRESSURE = 1
+    PRESSURE = 0
+    TEMPERATUE = 1
     DENSITY = 2
     SPECIFIC_INTERNAL_ENERGY = 3
     SPECIFIC_ENTHALPY = 4
@@ -16,7 +16,7 @@ class Property(Enum):
     VAPOR_FRACTION = 6
 
 
-property_names = ("T", "P", "D", "U", "H", "S", "Q")
+property_names = ("P", "T", "D", "U", "H", "S", "Q")
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -25,11 +25,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     except ValueError:
         pass
     else:
-        p1 = property_names[req_body.get('p1')]
-        v1 = req_body.get('v1')
-        p2 = property_names[req_body.get('p2')]
-        v2 = req_body.get('v2')
-        f = req_body.get('f')
+        p1 = property_names[req_body.get('Prop1')]
+        v1 = req_body.get('Value1')
+        p2 = property_names[req_body.get('Prop2')]
+        v2 = req_body.get('Value2')
+        f = req_body.get('Fluid')
 
     if p1 and v1 and p2 and v2 and f:
         try:
